@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HERRINCA, SRL - Ferretería Industrial & Construcción | República Dominicana</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#D32F2F',
+              reddark: '#B71C1C',
+              green: '#1B5E20',
+              dark: '#1E293B',
+              gray: '#F8FAFC',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbars & smooth interactions */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .badge-pulse {
+      animation: pulse-ring 2s infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased pb-20 lg:pb-0">
+
+  <!-- TOP ANNOUNCEMENT BAR (RD Context) -->
+  <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4 text-center md:text-left">
+        <span><i class="fa-solid fa-truck-fast text-red-500 mr-1.5"></i> Envíos exprés a Gran Santo Domingo y Santiago | Envíos a todo RD por Metro Pack / Caribe Tours</span>
+        <span class="hidden lg:inline text-slate-500">|</span>
+        <span class="hidden lg:inline"><i class="fa-solid fa-store text-emerald-400 mr-1"></i> Retiro gratis en sucursales en 1 hora</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Customer Segment Selector -->
+        <div class="flex items-center bg-slate-800 px-2 py-0.5 rounded text-xs border border-slate-700">
+          <span class="mr-2 text-slate-400">Tarifa actual:</span>
+          <button id="userTypeToggleBtn" onclick="toggleUserType()" class="font-bold text-amber-400 hover:underline flex items-center gap-1">
+            <span id="userTypeLabel">Cliente General (Minorista)</span>
+            <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+          </button>
+        </div>
+        <a href="tel:8095550199" class="hover:text-white"><i class="fa-solid fa-phone mr-1"></i> (809) 555-0199</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="bg-white sticky top-0 z-30 shadow-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- LOGO (SVG Recreation of HERRINCA. SRL exact branding) -->
+        <a href="#" onclick="resetFilters(); return false;" class="flex-shrink-0 flex items-center gap-3 group">
+          <svg class="h-12 w-auto" viewBox="0 0 280 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 3D 'H' Graphic with Red Front and Green Depth/Backing -->
+            <!-- Depth/Back Shadow Green -->
+            <path d="M 12 12 L 28 12 L 28 36 L 44 36 L 44 12 L 60 12 L 60 72 L 44 72 L 44 48 L 28 48 L 28 72 L 12 72 Z" fill="#155E75" opacity="0.1"/>
+            <path d="M 18 10 L 28 20 L 28 42 L 44 42 L 44 20 L 54 10 L 64 20 L 64 78 L 50 78 L 50 54 L 32 54 L 32 78 L 18 78 Z" fill="#1B5E20"/>
+            <!-- Front Red Block H -->
+            <path d="M 8 5 L 24 5 L 24 30 L 40 30 L 40 5 L 56 5 L 56 68 L 40 68 L 40 43 L 24 43 L 24 68 L 8 68 Z" fill="#D32F2F" stroke="#991B1B" stroke-width="1.5"/>
+            <!-- Inner bevel highlights -->
+            <path d="M 8 5 L 14 11 L 24 11 L 24 5 Z" fill="#EF4444"/>
+            <path d="M 40 5 L 46 11 L 56 11 L 56 5 Z" fill="#EF4444"/>
+            <!-- HERRINCA. SRL Typography -->
+            <text x="72" y="48" font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#0F172A" letter-spacing="0.5">HERRINCA.</text>
+            <text x="218" y="48" font-family="'Inter', sans-serif" font-weight="600" font-size="22" fill="#1E293B">SRL</text>
+            <!-- Red Accent Bar -->
+            <rect x="72" y="56" width="180" height="5" fill="#D32F2F" rx="1"/>
+          </svg>
+        </a>
+
+        <!-- SEARCH BAR (High critical capability for hardware/codes) -->
+        <div class="flex-1 max-w-2xl relative hidden md:block">
+          <div class="relative flex items-center">
+            <input 
+              type="text" 
+              id="searchInput"
+              oninput="handleSearch()"
+              placeholder="Buscar por código exacto (SKU), marca (Bosch, Truper), medida (ej: 1/4 x 2) o producto..." 
+              class="w-full bg-slate-50 text-slate-900 border border-slate-300 rounded-lg pl-10 pr-24 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 focus:bg-white transition-all shadow-inner"
+            >
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-slate-400"></i>
+            <button 
+              onclick="handleSearch()" 
+              class="absolute right-1 top-1 bottom-1 px-4 bg-brand-red hover:bg-red-700 text-white font-medium text-xs rounded-md transition-colors flex items-center gap-1">
+              Buscar
+            </button>
+          </div>
+          
+          <!-- Live Search Results Dropdown -->
+          <div id="searchDropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-lg shadow-2xl z-50 max-h-96 overflow-y-auto">
+            <!-- Dynamic search results populated by JS -->
+          </div>
+        </div>
+
+        <!-- USER ACTIONS / CART -->
+        <div class="flex items-center gap-3">
+          <!-- WhatsApp Direct Contact -->
+          <a href="https://wa.me/18095550199?text=Hola%20Herrinca,%20necesito%20una%20cotizacion" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 px-3 py-2 rounded-lg text-xs font-semibold transition-all">
+            <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i>
+            <span class="hidden xl:inline">Cotizar por WhatsApp</span>
+          </a>
+
+          <!-- B2B Account Status Badge -->
+          <button onclick="toggleUserType()" class="hidden lg:flex flex-col text-left px-2 py-1 rounded hover:bg-slate-50 border border-transparent hover:border-slate-200">
+            <span class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Tipo de Cuenta</span>
+            <span id="userTypeBadge" class="text-xs font-bold text-slate-800 flex items-center gap-1">
+              <i class="fa-solid fa-user-tag text-red-600"></i> Minorista
+            </span>
+          </button>
+
+          <!-- Shopping Cart Button -->
+          <button onclick="toggleCartDrawer()" class="relative bg-slate-900 hover:bg-slate-800 text-white p-2.5 rounded-lg flex items-center gap-2 transition-all shadow">
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <span class="hidden md:inline font-bold text-xs">Carrito</span>
+            <span id="cartBadgeCount" class="bg-brand-red text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Search Input -->
+      <div class="mt-2 md:hidden">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="searchInputMobile"
+            oninput="handleSearchMobile()"
+            placeholder="Buscar SKU, marca o producto (ej: Tornillo 1/4)..." 
+            class="w-full bg-slate-100 text-slate-900 border border-slate-300 rounded-lg pl-9 pr-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-LEVEL NAVIGATION MENU BAR -->
+    <nav class="bg-slate-900 text-white text-sm border-t border-slate-800 overflow-x-auto">
+      <div class="max-w-7xl mx-auto px-4 flex items-center whitespace-nowrap">
+        
+        <!-- Category Dropdown Trigger -->
+        <div class="relative group">
+          <button class="bg-brand-red hover:bg-red-700 font-bold px-4 py-3 flex items-center gap-2 text-xs uppercase tracking-wide transition-colors">
+            <i class="fa-solid fa-bars text-sm"></i> Todos los Rubros
+            <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
+          </button>
+
+          <!-- Mega Dropdown 3 Levels -->
+          <div class="absolute top-full left-0 w-80 bg-white text-slate-800 shadow-2xl rounded-b-lg border border-slate-200 hidden group-hover:block z-40">
+            <div class="p-2 space-y-1">
+              
+              <!-- Category Level 1: Construcción & Fijaciones -->
+              <div class="relative group/sub text-xs">
+                <a href="#" onclick="filterByCategory('Construcción'); return false;" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-100 font-semibold text-slate-700">
+                  <span><i class="fa-solid fa-building text-slate-500 w-5"></i> Construcción & Fijaciones</span>
+                  <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                </a>
+                <!-- Level 2 Submenu -->
+                <div class="absolute top-0 left-full ml-0 w-64 bg-white border border-slate-200 shadow-xl rounded-r-lg hidden group-hover/sub:block p-2">
+                  <div class="font-bold text-slate-900 pb-1 mb-1 border-b text-[11px] uppercase tracking-wider text-red-600">Subcategorías</div>
+                  <a href="#" onclick="filterBySubcategory('Fijaciones'); return false;" class="block px-2 py-1.5 hover:bg-slate-50 rounded text-slate-700">Fijaciones y Tornillería</a>
+                  <a href="#" onclick="filterBySubcategory('Cemento y Varilla'); return false;" class="block px-2 py-1.5 hover:bg-slate-50 rounded text-slate-700">Aglomerantes y Estructura</a>
+                  <div class="font-bold text-slate-900 pt-2 pb-1 my-1 border-t text-[11px] uppercase tracking-wider text-slate-500">Tipos de Producto (Nivel 3)</div>
+                  <a href="#" onclick="filterByProductType('Tornillos Madera'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Tornillos para Madera</a>
+                  <a href="#" onclick="filterByProductType('Tornillos Drywall'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Tornillos Drywall / Zinc</a>
+                  <a href="#" onclick="filterByProductType('Anclajes Pesados'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Anclajes de Expansión</a>
+                </div>
+              </div>
+
+              <!-- Category Level 1: Herramientas -->
+              <div class="relative group/sub text-xs">
+                <a href="#" onclick="filterByCategory('Herramientas'); return false;" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-100 font-semibold text-slate-700">
+                  <span><i class="fa-solid fa-screwdriver-wrench text-slate-500 w-5"></i> Herramientas Manuales y Eléctricas</span>
+                  <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                </a>
+                <div class="absolute top-0 left-full ml-0 w-64 bg-white border border-slate-200 shadow-xl rounded-r-lg hidden group-hover/sub:block p-2">
+                  <a href="#" onclick="filterBySubcategory('Herramientas Eléctricas'); return false;" class="block px-2 py-1.5 hover:bg-slate-50 rounded font-bold text-slate-800">Eléctricas e Inalámbricas</a>
+                  <a href="#" onclick="filterByProductType('Taladros'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Taladros y Rotomartillos</a>
+                  <a href="#" onclick="filterByProductType('Pulidoras'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Esmeriladoras y Amoladoras</a>
+                  <a href="#" onclick="filterBySubcategory('Herramientas Manuales'); return false;" class="block px-2 py-1.5 hover:bg-slate-50 rounded font-bold text-slate-800 mt-2">Manuales de Taller</a>
+                  <a href="#" onclick="filterByProductType('Llaves y Alicates'); return false;" class="block px-2 py-1 text-slate-600 hover:text-red-600">• Juegos de Llaves y Alicates</a>
+                </div>
+              </div>
+
+              <!-- Category Level 1: Plomería y Electricidad -->
+              <div class="relative group/sub text-xs">
+                <a href="#" onclick="filterByCategory('Plomería & Electricidad'); return false;" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-100 font-semibold text-slate-700">
+                  <span><i class="fa-solid fa-faucet-drip text-slate-500 w-5"></i> Plomería, Tubos & Electricidad</span>
+                  <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="flex items-center gap-6 px-4 text-xs font-medium text-slate-300">
+          <button onclick="resetFilters()" class="hover:text-white transition-colors">Inicio Catalog</button>
+          <button onclick="filterByBrand('Bosch')" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-tag text-amber-500 mr-1"></i> Bosch Professional</button>
+          <button onclick="filterByBrand('Truper')" class="hover:text-amber-400 transition-colors">Truper RD</button>
+          <button onclick="filterByStockOnly()" class="hover:text-emerald-400 transition-colors text-emerald-400 font-semibold"><i class="fa-solid fa-bolt mr-1"></i> Retiro Inmediato en Tienda</button>
+          <button onclick="openB2BQuoteModal()" class="hover:text-white text-slate-300 transition-colors"><i class="fa-solid fa-file-invoice-dollar mr-1"></i> Cotización Volumétrica B2B</button>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 py-6">
+
+    <!-- HERO / B2B PROMO BANNER FOR RD FERRETEROS -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-6 mb-8 text-white shadow-xl relative overflow-hidden border border-slate-700">
+      <div class="relative z-10 max-w-2xl">
+        <div class="inline-flex items-center gap-2 bg-red-600/30 border border-red-500/40 text-red-300 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+          <span class="w-2 h-2 rounded-full bg-red-500 badge-pulse"></span>
+          Especialistas en Maestros de Obra y Contratistas RD
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2">
+          Suministros Ferreteros con Precios Preferenciales B2B
+        </h1>
+        <p class="text-slate-300 text-xs md:text-sm mb-4 leading-relaxed">
+          Precios especiales por volumen para talleres y constructoras. Emisión inmediata de <strong>Comprobante Fiscal e-CF DGII (Crédito Fiscal)</strong>. Retiro inmediato en sucursal Santo Domingo o envío con flete consolidado.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="setB2BMode(true)" class="bg-brand-red hover:bg-red-700 text-white font-bold px-4 py-2.5 rounded-lg text-xs transition-all shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-id-card"></i> Activar Tarifa Maestro de Obra / B2B
+          </button>
+          <button onclick="openB2BQuoteModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 font-semibold px-4 py-2.5 rounded-lg text-xs transition-all">
+            Solicitar Presupuesto Especial
+          </button>
+        </div>
+      </div>
+      <!-- Background Decorative Grid -->
+      <div class="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-12">
+        <i class="fa-solid fa-boxes-packing text-[180px] text-white"></i>
+      </div>
+    </div>
+
+    <!-- BREADCRUMBS & ACTIVE FILTER BADGES -->
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-xs">
+      <div id="breadcrumbs" class="flex items-center gap-2 text-slate-500">
+        <span class="font-semibold text-slate-800">Catálogo General</span>
+        <span>/</span>
+        <span id="currentCategoryBreadcrumb" class="text-red-600 font-medium">Todos los Productos (SKU)</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-slate-400">Ordenar por:</span>
+        <select id="sortSelect" onchange="applySorting()" class="bg-slate-50 border border-slate-300 text-slate-700 rounded px-2.5 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-red-600">
+          <option value="popular">Más vendido</option>
+          <option value="price-asc">Precio: Menor a Mayor</option>
+          <option value="price-desc">Precio: Mayor a Menor</option>
+          <option value="code">Código SKU</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- TWO COLUMN LAYOUT: SIDEBAR FILTERS + PRODUCT GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+      <!-- SIDEBAR FILTERS -->
+      <aside class="space-y-6">
+        <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-filter text-red-600"></i> Filtros Específicos
+            </h2>
+            <button onclick="resetFilters()" class="text-[11px] text-red-600 hover:underline font-semibold">Limpiar todo</button>
+          </div>
+
+          <!-- Availability Filter RD -->
+          <div class="mb-5">
+            <label class="font-semibold text-slate-800 text-xs block mb-2">Disponibilidad en Tienda RD</label>
+            <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer hover:text-slate-900">
+              <input type="checkbox" id="stockFilterCheck" onchange="renderProducts()" class="rounded border-slate-300 text-red-600 focus:ring-red-500">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Retiro Inmediato en Sucursal
+              </span>
+            </label>
+          </div>
+
+          <!-- Brand Filter -->
+          <div class="mb-5">
+            <label class="font-semibold text-slate-800 text-xs block mb-2">Marcas Ferreteras</label>
+            <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+              <label class="flex items-center justify-between text-xs text-slate-600 cursor-pointer hover:text-slate-900">
+                <span class="flex items-center gap-2">
+                  <input type="checkbox" value="Bosch" class="brand-checkbox rounded border-slate-300 text-red-600" onchange="renderProducts()">
+                  Bosch Professional
+                </span>
+                <span class="text-[10px] text-slate-400">(4)</span>
+              </label>
+              <label class="flex items-center justify-between text-xs text-slate-600 cursor-pointer hover:text-slate-900">
+                <span class="flex items-center gap-2">
+                  <input type="checkbox" value="Truper" class="brand-checkbox rounded border-slate-300 text-red-600" onchange="renderProducts()">
+                  Truper
+                </span>
+                <span class="text-[10px] text-slate-400">(5)</span>
+              </label>
+              <label class="flex items-center justify-between text-xs text-slate-600 cursor-pointer hover:text-slate-900">
+                <span class="flex items-center gap-2">
+                  <input type="checkbox" value="Dewalt" class="brand-checkbox rounded border-slate-300 text-red-600" onchange="renderProducts()">
+                  DeWalt
+                </span>
+                <span class="text-[10px] text-slate-400">(3)</span>
+              </label>
+              <label class="flex items-center justify-between text-xs text-slate-600 cursor-pointer hover:text-slate-900">
+                <span class="flex items-center gap-2">
+                  <input type="checkbox" value="Herrinca" class="brand-checkbox rounded border-slate-300 text-red-600" onchange="renderProducts()">
+                  Herrinca Genérico
+                </span>
+                <span class="text-[10px] text-slate-400">(6)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range Filter in DOP / RD$ -->
+          <div class="mb-5">
+            <label class="font-semibold text-slate-800 text-xs block mb-2">Rango de Precio (RD$)</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="minPriceInput" placeholder="Min" class="w-full text-xs p-1.5 border border-slate-300 rounded" onchange="renderProducts()">
+              <span class="text-slate-400 text-xs">-</span>
+              <input type="number" id="maxPriceInput" placeholder="Max" class="w-full text-xs p-1.5 border border-slate-300 rounded" onchange="renderProducts()">
+            </div>
+          </div>
+
+          <!-- Unit of Sale Filter -->
+          <div>
+            <label class="font-semibold text-slate-800 text-xs block mb-2">Unidad de Venta</label>
+            <div class="space-y-1 text-xs text-slate-600">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="unitFilter" value="all" checked onchange="renderProducts()" class="text-red-600"> Todos
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="unitFilter" value="Caja" onchange="renderProducts()" class="text-red-600"> Venta por Caja / Ciento
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="unitFilter" value="Unidad" onchange="renderProducts()" class="text-red-600"> Venta por Unidad / Pieza
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TECHNICAL ASSISTANCE CARD -->
+        <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-xl p-4 shadow border border-slate-700 text-xs">
+          <div class="flex items-center gap-2 font-bold text-amber-400 mb-2">
+            <i class="fa-solid fa-headset text-base"></i> ¿Dudas con la ficha técnica?
+          </div>
+          <p class="text-slate-300 mb-3 leading-snug">
+            Nuestros asesores ferreteros en Santo Domingo te ayudan a calcular las cantidades exactas para tu obra.
+          </p>
+          <a href="https://wa.me/18095550199?text=Hola,%20necesito%20asesoria%20tecnica" target="_blank" class="block w-full text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded transition-colors">
+            <i class="fa-brands fa-whatsapp mr-1"></i> Hablar con Asesor RD
+          </a>
+        </div>
+      </aside>
+
+      <!-- PRODUCT CATALOG GRID -->
+      <section class="lg:col-span-3">
+        
+        <!-- Active Filter Indicator -->
+        <div id="activeFilterTags" class="flex flex-wrap items-center gap-2 mb-4">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Products Grid Container -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+          <!-- Dynamic Hardware Product Cards Rendered via JS -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="emptyState" class="hidden text-center py-16 bg-white rounded-xl border border-slate-200 p-6">
+          <i class="fa-solid fa-magnifying-glass-triangle-down text-4xl text-slate-300 mb-3"></i>
+          <h3 class="font-bold text-slate-800 text-base mb-1">No se encontraron artículos ferreteros</h3>
+          <p class="text-xs text-slate-500 mb-4">Intenta buscando por código exacto de fabricante o ajustando los filtros.</p>
+          <button onclick="resetFilters()" class="bg-brand-red text-white font-semibold text-xs px-4 py-2 rounded hover:bg-red-700">Ver todo el catálogo</button>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- CART DRAWER / SIDE OVERLAY -->
+  <div id="cartDrawerOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden transition-opacity" onclick="toggleCartDrawer()"></div>
+  <div id="cartDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-cart-flatbed text-red-500 text-lg"></i>
+        <h3 class="font-bold text-sm">Tu Carrito de Compras</h3>
+      </div>
+      <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-white p-1">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Active Pricing List Notice in Cart -->
+    <div class="bg-amber-50 border-b border-amber-200 px-4 py-2 text-xs flex justify-between items-center text-amber-900">
+      <span>Tarifa aplicada: <strong id="cartTariffLabel">General Minorista</strong></span>
+      <button onclick="toggleUserType()" class="text-red-700 underline font-semibold text-[11px]">Cambiar</button>
+    </div>
+
+    <!-- Cart Items List Container -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-4 divide-y divide-slate-100">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <!-- Cart Footer & Calculation (RD ITBIS Included) -->
+    <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+      <div class="space-y-1.5 text-xs text-slate-600">
+        <div class="flex justify-between">
+          <span>Subtotal neto:</span>
+          <span id="cartSubtotal">RD$ 0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>ITBIS (18% Ley RD):</span>
+          <span id="cartTax">RD$ 0.00</span>
+        </div>
+        <div class="flex justify-between text-emerald-700 font-medium">
+          <span>Envío / Retiro:</span>
+          <span id="cartShipping">Retiro en Tienda (Gratis)</span>
+        </div>
+        <div class="flex justify-between font-extrabold text-slate-900 text-sm pt-2 border-t border-slate-200">
+          <span>TOTAL COMPRA:</span>
+          <span id="cartTotal" class="text-red-600 text-base">RD$ 0.00</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <button onclick="openCheckoutModal()" id="checkoutBtn" disabled class="w-full bg-brand-red hover:bg-red-700 disabled:bg-slate-300 text-white font-bold py-3 rounded-lg text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow">
+          <span>Proceder al Checkout (RD)</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button onclick="openB2BQuoteModal()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold py-2 rounded text-xs transition-colors">
+          <i class="fa-solid fa-file-pdf mr-1"></i> Generar Cotización en PDF / WhatsApp
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHECKOUT MODAL (DOMINICAN REPUBLIC CONTEXT & DGII e-CF) -->
+  <div id="checkoutModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200">
+      
+      <!-- Checkout Modal Header -->
+      <div class="bg-slate-900 text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+        <div>
+          <h2 class="font-bold text-base flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-red-500"></i> Finalizar Compra - HERRINCA, SRL
+          </h2>
+          <p class="text-[11px] text-slate-400">Checkout rápido dominicano sin creación obligatoria de cuenta</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)" class="p-6 space-y-6 text-xs">
+        
+        <!-- STEP 1: Datos del Cliente -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider border-b pb-1 flex items-center gap-2 text-red-600">
+            <span class="bg-red-100 text-red-700 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px]">1</span>
+            Datos del Comprador
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Nombre Completo / Contacto *</label>
+              <input type="text" required placeholder="Ej: Juan Pérez" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-red-600">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Teléfono / WhatsApp *</label>
+              <input type="tel" required placeholder="809-000-0000" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-red-600">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block font-semibold text-slate-700 mb-1">Correo Electrónico (para comprobante) *</label>
+              <input type="email" required placeholder="cliente@ejemplo.com" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-red-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Facturación e-CF DGII (Crédito Fiscal vs Consumidor Final) -->
+        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2 text-slate-800">
+            <i class="fa-solid fa-file-invoice text-emerald-600"></i> Facturación Electrónica DGII (e-CF)
+          </h3>
+          
+          <div class="space-y-2">
+            <label class="block font-medium text-slate-700">Seleccione tipo de comprobante fiscal requerido:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <label class="flex items-start gap-2 bg-white p-2.5 rounded border border-slate-300 cursor-pointer hover:border-red-500">
+                <input type="radio" name="fiscalType" value="B02" checked onchange="toggleFiscalFields()" class="mt-0.5 text-red-600">
+                <div>
+                  <div class="font-bold text-slate-800">Consumidor Final (e-CF 32 / B02)</div>
+                  <div class="text-[10px] text-slate-500">Para compras personales. Incluye Cédula opcional.</div>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-2 bg-white p-2.5 rounded border border-slate-300 cursor-pointer hover:border-red-500">
+                <input type="radio" name="fiscalType" value="B01" onchange="toggleFiscalFields()" class="mt-0.5 text-red-600">
+                <div>
+                  <div class="font-bold text-slate-800">Crédito Fiscal (e-CF 31 / B01)</div>
+                  <div class="text-[10px] text-slate-500">Para empresas y talleres. Requiere RNC válido.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Fiscal Fields -->
+          <div id="rncFieldsContainer" class="hidden grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">RNC de la Empresa *</label>
+              <input type="text" id="rncInput" placeholder="Ej: 130123456" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-red-600">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Razón Social Registrada en DGII *</label>
+              <input type="text" id="razonSocialInput" placeholder="Ej: Constructora Del Este SRL" class="w-full p-2 border border-slate-300 rounded focus:ring-1 focus:ring-red-600">
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-500 flex items-center gap-1">
+            <i class="fa-solid fa-circle-info text-blue-500"></i> HERRINCA, SRL emitirá la factura e-CF correspondiente de acuerdo con la norma tributaria de RD.
+          </p>
+        </div>
+
+        <!-- STEP 3: Método de Entrega RD -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider border-b pb-1 flex items-center gap-2 text-red-600">
+            <span class="bg-red-100 text-red-700 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px]">2</span>
+            Método de Entrega / Logística
+          </h3>
+
+          <div class="space-y-2">
+            <label class="flex items-center gap-2 p-2.5 border rounded-lg cursor-pointer bg-emerald-50/50 border-emerald-300">
+              <input type="radio" name="shippingMethod" value="pickup" checked onchange="updateShippingCost(0)" class="text-red-600">
+              <div class="flex-1 flex justify-between items-center">
+                <div>
+                  <span class="font-bold text-slate-800">Retiro Gratis en Sucursal</span>
+                  <p class="text-[10px] text-slate-500">Av. Luperón, Santo Domingo D.N.</p>
+                </div>
+                <span class="font-bold text-emerald-700">GRATIS</span>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-2 p-2.5 border rounded-lg cursor-pointer hover:bg-slate-50 border-slate-300">
+              <input type="radio" name="shippingMethod" value="delivery" onchange="updateShippingCost(350)" class="text-red-600">
+              <div class="flex-1 flex justify-between items-center">
+                <div>
+                  <span class="font-bold text-slate-800">Envío Exprés Gran Santo Domingo</span>
+                  <p class="text-[10px] text-slate-500">Entrega en 24 horas laborables en obra o taller</p>
+                </div>
+                <span class="font-bold text-slate-800">RD$ 350.00</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 4: Métodos de Pago Locales (CardNET / Azul / Transferencia Popular) -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider border-b pb-1 flex items-center gap-2 text-red-600">
+            <span class="bg-red-100 text-red-700 w-5 h-5 rounded-full inline-flex items-center justify-center text-[11px]">3</span>
+            Forma de Pago (RD)
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            
+            <!-- CardNET / Azul Gateway -->
+            <label class="p-3 border rounded-xl cursor-pointer bg-white hover:border-red-500 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <input type="radio" name="paymentMethod" value="cardnet" checked onchange="togglePaymentUI()" class="text-red-600">
+                <div class="flex gap-1">
+                  <i class="fa-brands fa-cc-visa text-blue-700 text-lg"></i>
+                  <i class="fa-brands fa-cc-mastercard text-orange-600 text-lg"></i>
+                </div>
+              </div>
+              <div>
+                <div class="font-bold text-slate-800">Tarjeta (CardNET / Azul)</div>
+                <div class="text-[10px] text-slate-500">Procesamiento seguro en DOP</div>
+              </div>
+            </label>
+
+            <!-- Bank Transfer Popular / Banreservas -->
+            <label class="p-3 border rounded-xl cursor-pointer bg-white hover:border-red-500 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <input type="radio" name="paymentMethod" value="transfer" onchange="togglePaymentUI()" class="text-red-600">
+                <i class="fa-solid fa-building-columns text-slate-700 text-base"></i>
+              </div>
+              <div>
+                <div class="font-bold text-slate-800">Transferencia Bancaria</div>
+                <div class="text-[10px] text-slate-500">Banco Popular / Banreservas</div>
+              </div>
+            </label>
+
+            <!-- Pay on Pickup / Delivery -->
+            <label class="p-3 border rounded-xl cursor-pointer bg-white hover:border-red-500 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <input type="radio" name="paymentMethod" value="cod" onchange="togglePaymentUI()" class="text-red-600">
+                <i class="fa-solid fa-hand-holding-dollar text-emerald-600 text-base"></i>
+              </div>
+              <div>
+                <div class="font-bold text-slate-800">Pago en Tienda / Contra Entrega</div>
+                <div class="text-[10px] text-slate-500">Efectivo o verífono al retirar</div>
+              </div>
+            </label>
+
+          </div>
+
+          <!-- Bank Transfer Instructions UI -->
+          <div id="transferInfoBox" class="hidden bg-slate-100 p-3 rounded-lg border border-slate-300 space-y-2">
+            <div class="font-bold text-slate-800 text-[11px] flex items-center gap-1">
+              <i class="fa-solid fa-circle-info text-blue-600"></i> Cuentas Corrientes HERRINCA, SRL:
+            </div>
+            <div class="text-[11px] text-slate-700 space-y-1">
+              <p>• <strong>Banco Popular Dominicano:</strong> Cta. Cte. #798201928</p>
+              <p>• <strong>Banreservas:</strong> Cta. Cte. #9601928371</p>
+              <p class="text-slate-500 text-[10px]">RNC Herrinca SRL: 1-30-99882-1</p>
+            </div>
+            <div class="pt-2">
+              <label class="block font-semibold mb-1 text-[11px]">Subir Comprobante de Transferencia (Simulación):</label>
+              <input type="file" accept="image/*,.pdf" class="block w-full text-[10px] text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-[10px] file:bg-slate-800 file:text-white">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Order Summary Breakdown in Checkout -->
+        <div class="border-t border-slate-200 pt-3 flex justify-between items-center text-sm">
+          <div>
+            <span class="text-slate-500">Total a Pagar (inc. ITBIS):</span>
+            <div id="checkoutTotalDisplay" class="font-extrabold text-red-600 text-lg">RD$ 0.00</div>
+          </div>
+          <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-lg text-xs uppercase tracking-wider transition-colors shadow-lg flex items-center gap-2">
+            <i class="fa-solid fa-lock"></i> Confirmar y Pagar Order
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SHEET (FICHA TÉCNICA) MODAL PREVIEW -->
+  <div id="techSheetModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-200">
+      <button onclick="closeTechSheetModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-4">
+        <i class="fa-solid fa-file-pdf text-red-600 text-3xl"></i>
+        <div>
+          <h3 id="techSheetTitle" class="font-bold text-slate-900 text-sm">Ficha Técnica Oficial</h3>
+          <p id="techSheetSku" class="text-xs text-slate-500">SKU: ---</p>
+        </div>
+      </div>
+
+      <div id="techSheetContent" class="space-y-3 text-xs text-slate-700">
+        <!-- Content injected dynamically -->
+      </div>
+
+      <div class="mt-6 pt-3 border-t border-slate-100 flex justify-between items-center">
+        <span class="text-[10px] text-slate-400">Documento homologado HERRINCA, SRL</span>
+        <button onclick="simulatePdfDownload()" class="bg-slate-900 text-white font-semibold px-4 py-2 rounded text-xs hover:bg-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-download"></i> Descargar Ficha PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- B2B DIRECT QUOTE MODAL -->
+  <div id="b2bQuoteModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeB2BQuoteModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="text-center mb-4">
+        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <h3 class="font-bold text-slate-900 text-base">Solicitud de Cotización Institucional</h3>
+        <p class="text-xs text-slate-500">Para maquinaria industrial, acero o pedidos de alto volumen</p>
+      </div>
+
+      <form onsubmit="handleB2BQuoteSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Nombre o Empresa *</label>
+          <input type="text" id="b2bName" required placeholder="Ej: Constructora Bávaro" class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">RNC (Opcional)</label>
+          <input type="text" placeholder="Ej: 1-30-XXXXX-X" class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Detalle del Pedido o Materiales *</label>
+          <textarea id="b2bDetails" rows="4" required placeholder="Ej: Requiero cotización de 50 cajas de Tornillo 1/4x2, 10 Taladros Bosch GSB 550 y 200 tubos PVC 1/2..." class="w-full p-2 border rounded"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded text-xs transition-colors flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Directo a Ventas WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-xs px-4 py-2.5 rounded-full shadow-2xl z-50 hidden transition-all duration-300 flex items-center gap-2 border border-slate-700">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMsg">Notificación</span>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON (HIGHLY CRITICAL IN RD) -->
+  <a href="https://wa.me/18095550199?text=Hola%20Herrinca,%20tengo%20una%20consulta%20de%20inventario" target="_blank" class="fixed bottom-5 right-5 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-40 transition-transform hover:scale-110">
+    <i class="fa-brands fa-whatsapp text-3xl"></i>
+    <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white"></span>
+  </a>
+
+  <!-- FOOTER WITH RD DGII & LEGAL INFORMATION -->
+  <footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800 pt-10 pb-16 lg:pb-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Col 1: About Herrinca -->
+      <div class="space-y-3">
+        <div class="text-white font-extrabold text-base flex items-center gap-2">
+          <span class="text-red-600">HERRINCA,</span> SRL
+        </div>
+        <p class="text-slate-400 leading-relaxed">
+          Suministros ferreteros e industriales en República Dominicana. Especialistas en tornillería, herramientas profesionales y materiales de construcción con comprobante fiscal e-CF.
+        </p>
+        <div class="text-slate-300 font-medium">
+          <p><i class="fa-solid fa-location-dot text-red-500 mr-1.5"></i> Av. Luperón #45, Zona Industrial, Santo Domingo</p>
+          <p><i class="fa-solid fa-phone text-red-500 mr-1.5"></i> (809) 555-0199</p>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation Links -->
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Categorías Clave</h4>
+        <ul class="space-y-2">
+          <li><a href="#" onclick="filterByCategory('Construcción')" class="hover:text-white">Fijaciones y Tornillería</a></li>
+          <li><a href="#" onclick="filterByCategory('Herramientas')" class="hover:text-white">Herramientas Eléctricas Bosch / Dewalt</a></li>
+          <li><a href="#" onclick="filterByBrand('Truper')" class="hover:text-white">Línea Truper Profesional</a></li>
+          <li><a href="#" onclick="filterByCategory('Plomería & Electricidad')" class="hover:text-white">Tubos PVC & Plomería</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: RD Policies & DGII -->
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Políticas y Fiscalidad RD</h4>
+        <ul class="space-y-2">
+          <li><a href="#" onclick="showToast('Facturación e-CF registrada bajo RNC: 1-30-XXXXX-X')" class="hover:text-white"><i class="fa-solid fa-file-contract text-red-500 mr-1"></i> Facturación Electrónica DGII</a></li>
+          <li><a href="#" onclick="showToast('Política de Garantía: 1 año en herramientas eléctricas')" class="hover:text-white">Garantía y Devoluciones</a></li>
+          <li><a href="#" onclick="showToast('Envíos gratis en compras mayores a RD$ 5,000 en Santo Domingo')" class="hover:text-white">Términos de Envío y Flete</a></li>
+          <li><a href="#" onclick="showToast('Aceptamos tarjetas locales vía CardNET y Azul')" class="hover:text-white">Formas de Pago Aceptadas</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Payment Badges & Legal -->
+      <div class="space-y-3">
+        <h4 class="text-white font-bold uppercase tracking-wider text-[11px]">Pagos Seguros en RD</h4>
+        <p class="text-[11px]">Procesamiento directo en Pesos Dominicanos (DOP):</p>
+        <div class="flex flex-wrap gap-2 text-2xl text-slate-300">
+          <i class="fa-brands fa-cc-visa hover:text-white"></i>
+          <i class="fa-brands fa-cc-mastercard hover:text-white"></i>
+          <i class="fa-solid fa-building-columns hover:text-white" title="Banco Popular"></i>
+        </div>
+        <div class="bg-slate-800 p-2.5 rounded border border-slate-700 text-[10px] text-slate-300">
+          <i class="fa-solid fa-shield text-emerald-400 mr-1"></i> Precios expresados con ITBIS (18%) incluido.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-slate-800 text-center text-slate-500 text-[11px]">
+      © 2026 HERRINCA, SRL. Todos los derechos reservados. Santo Domingo, República Dominicana.
+    </div>
+  </footer>
+
+  <!-- CORE JAVASCRIPT LOGIC & STATE MANAGEMENT -->
+  <script>
+    // HARDWARE PRODUCT DATABASE (With exact codes, specs, units, dual pricing DOP)
+    const productsData = [
+      {
+        id: 'SKU-TOR-001',
+        code: 'TOR-142-ZIN',
+        name: 'Tornillo Rosca Chapistera 1/4 x 2"',
+        brand: 'Herrinca',
+        category: 'Construcción',
+        subcategory: 'Fijaciones',
+        productType: 'Tornillos Drywall',
+        priceMinorista: 8.50, // DOP per unit
+        priceB2B: 5.20,       // DOP B2B price per volume
+        unit: 'Caja x 100',
+        stock: 450,
+        availableStore: true,
+        popular: true,
+        image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          material: 'Acero Galvanizado Zincado',
+          cabeza: 'Hexagonal con arandela vulcanizada',
+          uso: 'Fijación en láminas de zinc, madera y perfiles metálicos',
+          norma: 'ASTM C1002'
+        }
+      },
+      {
+        id: 'SKU-BOS-550',
+        code: 'BOS-GSB-550',
+        name: 'Taladro de Percución Bosch GSB 550 RE 550W 1/2"',
+        brand: 'Bosch',
+        category: 'Herramientas',
+        subcategory: 'Herramientas Eléctricas',
+        productType: 'Taladros',
+        priceMinorista: 4850.00,
+        priceB2B: 4200.00,
+        unit: 'Unidad',
+        stock: 18,
+        availableStore: true,
+        popular: true,
+        image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          potencia: '550 Watts',
+          mandril: '1/2 pulgada (13mm)',
+          velocidad: '0 - 3100 RPM',
+          garantia: '1 Año Oficial Bosch RD'
+        }
+      },
+      {
+        id: 'SKU-TRU-102',
+        code: 'TRU-MAN-16',
+        name: 'Martillo de Uña Curva 16 oz Truper Pro',
+        brand: 'Truper',
+        category: 'Herramientas',
+        subcategory: 'Herramientas Manuales',
+        productType: 'Llaves y Alicates',
+        priceMinorista: 620.00,
+        priceB2B: 510.00,
+        unit: 'Unidad',
+        stock: 85,
+        availableStore: true,
+        popular: false,
+        image: 'https://images.unsplash.com/photo-1586864387789-628af9feed72?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          cabeza: 'Acero forjado de alto carbono',
+          mango: 'Fibra de vidrio con grip antideslizante',
+          peso: '16 oz (450g)'
+        }
+      },
+      {
+        id: 'SKU-DEW-20V',
+        code: 'DEW-DCD771',
+        name: 'Rotomartillo Inalámbrico DeWalt 20V Max Lithium',
+        brand: 'Dewalt',
+        category: 'Herramientas',
+        subcategory: 'Herramientas Eléctricas',
+        productType: 'Taladros',
+        priceMinorista: 9800.00,
+        priceB2B: 8900.00,
+        unit: 'Unidad',
+        stock: 4, // Low stock tag test
+        availableStore: true,
+        popular: true,
+        image: 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          voltaje: '20V Max',
+          baterias: 'Incluye 2 baterías de Ion de Litio + Cargador',
+          transmision: '2 velocidades (0-450 / 0-1500 RPM)'
+        }
+      },
+      {
+        id: 'SKU-ANC-002',
+        code: 'ANC-EXP-38',
+        name: 'Anclaje de Expansión en Acero 3/8 x 3"',
+        brand: 'Herrinca',
+        category: 'Construcción',
+        subcategory: 'Fijaciones',
+        productType: 'Anclajes Pesados',
+        priceMinorista: 45.00,
+        priceB2B: 32.00,
+        unit: 'Caja x 50',
+        stock: 310,
+        availableStore: true,
+        popular: false,
+        image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          material: 'Acero de alta resistencia con tuerca y arandela',
+          aplicacion: 'Fijación pesada en concreto sólido'
+        }
+      },
+      {
+        id: 'SKU-BOS-GWS',
+        code: 'BOS-GWS-700',
+        name: 'Esmeriladora Angular Bosch GWS 700 4-1/2" 700W',
+        brand: 'Bosch',
+        category: 'Herramientas',
+        subcategory: 'Herramientas Eléctricas',
+        productType: 'Pulidoras',
+        priceMinorista: 3950.00,
+        priceB2B: 3400.00,
+        unit: 'Unidad',
+        stock: 0, // Out of stock test
+        availableStore: false,
+        popular: true,
+        image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&auto=format&fit=crop&q=60',
+        specs: {
+          potencia: '700 Watts',
+          disco: '4-1/2 pulgadas (115mm)',
+          garantia: '1 Año Oficial'
+        }
+      }
+    ];
+
+    // APPLICATION STATE
+    let isB2BMode = false; // Retail vs Maestro de Obra pricing mode
+    let cart = [];
+    let currentCategoryFilter = null;
+    let currentSubcategoryFilter = null;
+    let currentProductTypeFilter = null;
+    let currentBrandFilter = null;
+    let activeShippingCost = 0;
+
+    // INITIALIZATION ON PAGE LOAD
+    window.onload = function() {
+      renderProducts();
+      updateCartUI();
+    };
+
+    // TOGGLE B2B vs MINORISTA PRICE LISTS
+    function toggleUserType() {
+      isB2BMode = !isB2BMode;
+      updateUserTypeBadges();
+      renderProducts();
+      updateCartUI();
+      showToast(isB2BMode ? "Tarifa B2B (Maestro de Obra) activada con descuento por volumen." : "Tarifa Cliente General (Minorista) activada.");
+    }
+
+    function setB2BMode(status) {
+      isB2BMode = status;
+      updateUserTypeBadges();
+      renderProducts();
+      updateCartUI();
+      showToast("Modo Maestro de Obra / B2B activado.");
+    }
+
+    function updateUserTypeBadges() {
+      const label = document.getElementById('userTypeLabel');
+      const badge = document.getElementById('userTypeBadge');
+      const cartTariff = document.getElementById('cartTariffLabel');
+
+      if(isB2BMode) {
+        label.innerText = 'Maestro de Obra / B2B';
+        label.className = 'font-bold text-emerald-400 hover:underline flex items-center gap-1';
+        badge.innerHTML = '<i class="fa-solid fa-briefcase text-emerald-600"></i> B2B / Maestro Obra';
+        cartTariff.innerText = 'Precios Preferenciales B2B';
+      } else {
+        label.innerText = 'Cliente General (Minorista)';
+        label.className = 'font-bold text-amber-400 hover:underline flex items-center gap-1';
+        badge.innerHTML = '<i class="fa-solid fa-user-tag text-red-600"></i> Minorista';
+        cartTariff.innerText = 'General Minorista';
+      }
+    }
+
+    // RENDER PRODUCT CARDS GRID WITH REAL-TIME FILTERS
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      const emptyState = document.getElementById('emptyState');
+      const stockOnly = document.getElementById('stockFilterCheck').checked;
+      const minPrice = parseFloat(document.getElementById('minPriceInput').value) || 0;
+      const maxPrice = parseFloat(document.getElementById('maxPriceInput').value) || Infinity;
+      const selectedUnit = document.querySelector('input[name="unitFilter"]:checked').value;
+
+      // Selected brands
+      const brandCheckboxes = document.querySelectorAll('.brand-checkbox:checked');
+      const selectedBrands = Array.from(brandCheckboxes).map(cb => cb.value.toLowerCase());
+
+      // Filter products
+      let filtered = productsData.filter(p => {
+        // Stock Filter
+        if (stockOnly && !p.availableStore) return false;
+
+        // Category / Subcategory Filters
+        if (currentCategoryFilter && p.category !== currentCategoryFilter) return false;
+        if (currentSubcategoryFilter && p.subcategory !== currentSubcategoryFilter) return false;
+        if (currentProductTypeFilter && p.productType !== currentProductTypeFilter) return false;
+
+        // Brand Filter
+        if (selectedBrands.length > 0 && !selectedBrands.includes(p.brand.toLowerCase())) return false;
+
+        // Price Filter
+        const price = isB2BMode ? p.priceB2B : p.priceMinorista;
+        if (price < minPrice || price > maxPrice) return false;
+
+        // Unit Filter
+        if (selectedUnit !== 'all' && !p.unit.includes(selectedUnit)) return false;
+
+        return true;
+      });
+
+      // Apply Sorting
+      const sortVal = document.getElementById('sortSelect').value;
+      if (sortVal === 'price-asc') {
+        filtered.sort((a, b) => (isB2BMode ? a.priceB2B : a.priceMinorista) - (isB2BMode ? b.priceB2B : b.priceMinorista));
+      } else if (sortVal === 'price-desc') {
+        filtered.sort((a, b) => (isB2BMode ? b.priceB2B : b.priceMinorista) - (isB2BMode ? a.priceB2B : a.priceMinorista));
+      } else if (sortVal === 'code') {
+        filtered.sort((a, b) => a.code.localeCompare(b.code));
+      }
+
+      // DOM Rendering
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => {
+        const activePrice = isB2BMode ? p.priceB2B : p.priceMinorista;
+        const otherPrice = isB2BMode ? p.priceMinorista : p.priceB2B;
+
+        // Stock Tag Logic
+        let stockTag = '';
+        if (p.stock === 0) {
+          stockTag = `<span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> Consultar Disponibilidad</span>`;
+        } else if (p.stock <= 5) {
+          stockTag = `<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1 badge-pulse"><i class="fa-solid fa-triangle-exclamation"></i> Últimas ${p.stock} Unidades</span>`;
+        } else {
+          stockTag = `<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> En Stock Sucursal RD</span>`;
+        }
+
+        return `
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+            
+            <!-- Product Header & Code Tag -->
+            <div class="p-3 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-[11px]">
+              <span class="font-mono font-bold text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200">SKU: ${p.code}</span>
+              ${stockTag}
+            </div>
+
+            <!-- Product Image -->
+            <div class="relative h-44 p-4 flex items-center justify-center bg-white overflow-hidden">
+              <img src="${p.image}" alt="${p.name}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x300/f1f5f9/475569?text=Herrinca+Hardware'">
+              <span class="absolute top-2 left-2 bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">${p.brand}</span>
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-red-600 tracking-wider">${p.category} &gt; ${p.subcategory}</span>
+                <h3 class="font-bold text-slate-800 text-xs mt-0.5 line-clamp-2 hover:text-red-600 transition-colors">
+                  ${p.name}
+                </h3>
+                <div class="text-[11px] text-slate-500 mt-1">Unidad de Venta: <strong>${p.unit}</strong></div>
+              </div>
+
+              <!-- Dual Price Display -->
+              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200/80">
+                <div class="flex items-baseline justify-between">
+                  <div>
+                    <span class="text-[10px] text-slate-400 block">${isB2BMode ? 'Precio B2B / Maestro:' : 'Precio Minorista (inc. ITBIS):'}</span>
+                    <span class="text-base font-extrabold text-slate-900">RD$ ${activePrice.toFixed(2)}</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[10px] text-slate-400 block">${isB2BMode ? 'Antes Minorista:' : 'Precio Volumétrico B2B:'}</span>
+                    <span class="text-xs font-semibold ${isB2BMode ? 'line-through text-slate-400' : 'text-emerald-700'}">
+                      RD$ ${otherPrice.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Action Inputs & Buttons -->
+              <div class="space-y-2 pt-1">
+                <div class="flex items-center gap-2">
+                  <!-- Easy Quantity Picker for Bulk Buying (e.g., 100 units) -->
+                  <div class="flex items-center border border-slate-300 rounded overflow-hidden w-28 flex-shrink-0">
+                    <button onclick="adjustQtyInput('${p.id}', -1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 text-xs">-</button>
+                    <input type="number" id="qty-${p.id}" value="1" min="1" class="w-full text-center text-xs font-bold focus:outline-none p-1">
+                    <button onclick="adjustQtyInput('${p.id}', 1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 text-xs">+</button>
+                  </div>
+
+                  <button 
+                    onclick="addToCart('${p.id}')" 
+                    ${p.stock === 0 ? 'disabled' : ''} 
+                    class="flex-1 bg-brand-red hover:bg-red-700 disabled:bg-slate-300 text-white font-bold py-2 px-3 rounded text-xs transition-colors flex items-center justify-center gap-1 shadow-sm">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>${p.stock === 0 ? 'Agotado' : 'Agregar'}</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between text-[11px] pt-1">
+                  <button onclick="openTechSheet('${p.id}')" class="text-slate-600 hover:text-red-600 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-file-pdf text-red-500"></i> Ficha Técnica
+                  </button>
+
+                  <button onclick="quickQuoteWhatsApp('${p.id}')" class="text-emerald-700 hover:underline font-semibold flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp"></i> Cotizar Volumen
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // SEARCH FUNCTIONALITY (Indexed by Code, SKU, Brand, Name)
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const dropdown = document.getElementById('searchDropdown');
+
+      if (query.length < 2) {
+        dropdown.classList.add('hidden');
+        return;
+      }
+
+      const matches = productsData.filter(p => 
+        p.code.toLowerCase().includes(query) ||
+        p.name.toLowerCase().includes(query) ||
+        p.brand.toLowerCase().includes(query) ||
+        p.subcategory.toLowerCase().includes(query)
+      );
+
+      if (matches.length === 0) {
+        dropdown.innerHTML = `<div class="p-3 text-xs text-slate-500">No se encontraron coincidencia de SKU o producto.</div>`;
+      } else {
+        dropdown.innerHTML = matches.map(m => `
+          <div onclick="selectSearchProduct('${m.id}')" class="p-2.5 hover:bg-slate-50 cursor-pointer border-b border-slate-100 flex items-center gap-3">
+            <img src="${m.image}" class="w-10 h-10 object-contain bg-slate-100 p-1 rounded">
+            <div class="flex-1 text-xs">
+              <div class="font-bold text-slate-800">${m.name}</div>
+              <div class="text-[10px] text-slate-500 font-mono">SKU: ${m.code} | Marca: ${m.brand}</div>
+            </div>
+            <div class="text-xs font-bold text-red-600">RD$ ${(isB2BMode ? m.priceB2B : m.priceMinorista).toFixed(2)}</div>
+          </div>
+        `).join('');
+      }
+
+      dropdown.classList.remove('hidden');
+    }
+
+    function handleSearchMobile() {
+      const query = document.getElementById('searchInputMobile').value.toLowerCase().trim();
+      if(query.length >= 2) {
+        document.getElementById('searchInput').value = query;
+        renderProducts();
+      }
+    }
+
+    function selectSearchProduct(productId) {
+      document.getElementById('searchDropdown').classList.add('hidden');
+      addToCart(productId);
+      toggleCartDrawer();
+    }
+
+    // QUANTITY INPUT HELPER
+    function adjustQtyInput(productId, delta) {
+      const input = document.getElementById(`qty-${productId}`);
+      if(input) {
+        let val = parseInt(input.value) || 1;
+        val = Math.max(1, val + delta);
+        input.value = val;
+      }
+    }
+
+    // CART OPERATIONS
+    function addToCart(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if(!product) return;
+
+      const qtyInput = document.getElementById(`qty-${productId}`);
+      const quantityToAdd = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+
+      const existingItem = cart.find(item => item.id === productId);
+      if(existingItem) {
+        existingItem.quantity += quantityToAdd;
+      } else {
+        cart.push({
+          ...product,
+          quantity: quantityToAdd
+        });
+      }
+
+      updateCartUI();
+      showToast(`Se agregaron ${quantityToAdd} ${product.unit} de "${product.name}" al carrito.`);
+    }
+
+    function updateCartItemQty(productId, newQty) {
+      if(newQty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      } else {
+        const item = cart.find(i => i.id === productId);
+        if(item) item.quantity = newQty;
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cartItemsContainer');
+      const badge = document.getElementById('cartBadgeCount');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      // Total Quantity count
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      badge.innerText = totalCount;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-slate-400">
+            <i class="fa-solid fa-cart-arrow-down text-4xl mb-2"></i>
+            <p class="text-xs">Tu carrito está vacío</p>
+          </div>
+        `;
+        checkoutBtn.disabled = true;
+        updateCartTotals(0);
+        return;
+      }
+
+      checkoutBtn.disabled = false;
+      let netSubtotal = 0;
+
+      container.innerHTML = cart.map(item => {
+        const itemPrice = isB2BMode ? item.priceB2B : item.priceMinorista;
+        const itemTotal = itemPrice * item.quantity;
+        netSubtotal += itemTotal;
+
+        return `
+          <div class="pt-3 first:pt-0 flex gap-3 text-xs">
+            <img src="${item.image}" class="w-14 h-14 object-contain bg-slate-100 p-1 rounded border">
+            <div class="flex-1 space-y-1">
+              <div class="font-bold text-slate-800 line-clamp-1">${item.name}</div>
+              <div class="text-[10px] text-slate-500 font-mono">SKU: ${item.code}</div>
+              <div class="text-xs font-semibold text-red-600">RD$ ${itemPrice.toFixed(2)} / ${item.unit}</div>
+              
+              <div class="flex items-center justify-between pt-1">
+                <div class="flex items-center border rounded">
+                  <button onclick="updateCartItemQty('${item.id}', ${item.quantity - 1})" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200">-</button>
+                  <span class="px-2 font-bold text-xs">${item.quantity}</span>
+                  <button onclick="updateCartItemQty('${item.id}', ${item.quantity + 1})" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200">+</button>
+                </div>
+                <span class="font-extrabold text-slate-900">RD$ ${itemTotal.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateCartTotals(netSubtotal);
+    }
+
+    // DOMINICAN TAX (ITBIS 18%) & TOTAL CALCULATION
+    function updateCartTotals(subtotal) {
+      // In RD hardware, prices typically include ITBIS 18% or are calculated as subtotal + 18%
+      const itbisTax = subtotal * 0.18;
+      const grandTotal = subtotal + itbisTax + activeShippingCost;
+
+      document.getElementById('cartSubtotal').innerText = `RD$ ${subtotal.toFixed(2)}`;
+      document.getElementById('cartTax').innerText = `RD$ ${itbisTax.toFixed(2)}`;
+      document.getElementById('cartTotal').innerText = `RD$ ${grandTotal.toFixed(2)}`;
+      document.getElementById('checkoutTotalDisplay').innerText = `RD$ ${grandTotal.toFixed(2)}`;
+    }
+
+    // DRAWER & MODAL TOGGLES
+    function toggleCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartDrawerOverlay');
+      drawer.classList.toggle('translate-x-full');
+      overlay.classList.toggle('hidden');
+    }
+
+    function openCheckoutModal() {
+      toggleCartDrawer();
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function toggleFiscalFields() {
+      const type = document.querySelector('input[name="fiscalType"]:checked').value;
+      const rncContainer = document.getElementById('rncFieldsContainer');
+      const rncInput = document.getElementById('rncInput');
+      const razonInput = document.getElementById('razonSocialInput');
+
+      if (type === 'B01') {
+        rncContainer.classList.remove('hidden');
+        rncInput.setAttribute('required', 'true');
+        razonInput.setAttribute('required', 'true');
+      } else {
+        rncContainer.classList.add('hidden');
+        rncInput.removeAttribute('required');
+        razonInput.removeAttribute('required');
+      }
+    }
+
+    function updateShippingCost(cost) {
+      activeShippingCost = cost;
+      const shippingLabel = document.getElementById('cartShipping');
+      shippingLabel.innerText = cost === 0 ? "Retiro en Tienda (Gratis)" : `RD$ ${cost.toFixed(2)}`;
+      
+      const subtotalText = document.getElementById('cartSubtotal').innerText.replace('RD$', '').trim();
+      const subtotal = parseFloat(subtotalText) || 0;
+      updateCartTotals(subtotal);
+    }
+
+    function togglePaymentUI() {
+      const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const transferBox = document.getElementById('transferInfoBox');
+      if (method === 'transfer') {
+        transferBox.classList.remove('hidden');
+      } else {
+        transferBox.classList.add('hidden');
+      }
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      alert("¡Pedido realizado con éxito en HERRINCA, SRL!\nSe ha enviado la confirmación y la factura e-CF preliminar a su correo electrónico.");
+      cart = [];
+      updateCartUI();
+      closeCheckoutModal();
+    }
+
+    // TECHNICAL SHEET (FICHA TÉCNICA) PREVIEW MODAL
+    function openTechSheet(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if(!product) return;
+
+      document.getElementById('techSheetTitle').innerText = product.name;
+      document.getElementById('techSheetSku').innerText = `Código de Fábrica: ${product.code} | Marca: ${product.brand}`;
+
+      const content = document.getElementById('techSheetContent');
+      content.innerHTML = `
+        <div class="bg-slate-50 p-3 rounded border space-y-1.5">
+          <div class="font-bold text-slate-800">Especificaciones de Fábrica:</div>
+          ${Object.entries(product.specs).map(([key, val]) => `
+            <div class="flex justify-between border-b border-slate-200 pb-1">
+              <span class="capitalize font-semibold text-slate-600">${key}:</span>
+              <span class="text-slate-900">${val}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="text-[11px] text-slate-500">
+          * Ficha validada para proyectos de construcción y licitaciones en República Dominicana.
+        </div>
+      `;
+
+      document.getElementById('techSheetModal').classList.remove('hidden');
+    }
+
+    function closeTechSheetModal() {
+      document.getElementById('techSheetModal').classList.add('hidden');
+    }
+
+    function simulatePdfDownload() {
+      showToast("Descargando Ficha Técnica PDF...");
+      closeTechSheetModal();
+    }
+
+    // WHATSAPP DIRECT QUOTE GENERATORS
+    function quickQuoteWhatsApp(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if(!product) return;
+      const text = `Hola Herrinca, me interesa solicitar una cotizacion por volumen del producto: ${product.name} (SKU: ${product.code}).`;
+      window.open(`https://wa.me/18095550199?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function openB2BQuoteModal() {
+      document.getElementById('b2bQuoteModal').classList.remove('hidden');
+    }
+
+    function closeB2BQuoteModal() {
+      document.getElementById('b2bQuoteModal').classList.add('hidden');
+    }
+
+    function handleB2BQuoteSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('b2bName').value;
+      const details = document.getElementById('b2bDetails').value;
+      const msg = `Hola Ventas Herrinca, soy ${name}. Requiero la siguiente cotización especial: ${details}`;
+      window.open(`https://wa.me/18095550199?text=${encodeURIComponent(msg)}`, '_blank');
+      closeB2BQuoteModal();
+    }
+
+    // CATEGORY FILTER HELPERS
+    function filterByCategory(cat) {
+      currentCategoryFilter = cat;
+      currentSubcategoryFilter = null;
+      currentProductTypeFilter = null;
+      document.getElementById('currentCategoryBreadcrumb').innerText = cat;
+      renderProducts();
+    }
+
+    function filterBySubcategory(sub) {
+      currentSubcategoryFilter = sub;
+      currentProductTypeFilter = null;
+      document.getElementById('currentCategoryBreadcrumb').innerText = sub;
+      renderProducts();
+    }
+
+    function filterByProductType(type) {
+      currentProductTypeFilter = type;
+      document.getElementById('currentCategoryBreadcrumb').innerText = type;
+      renderProducts();
+    }
+
+    function filterByBrand(brand) {
+      resetFilters();
+      const checkboxes = document.querySelectorAll('.brand-checkbox');
+      checkboxes.forEach(cb => {
+        if(cb.value.toLowerCase() === brand.toLowerCase()) cb.checked = true;
+      });
+      renderProducts();
+    }
+
+    function filterByStockOnly() {
+      resetFilters();
+      document.getElementById('stockFilterCheck').checked = true;
+      renderProducts();
+    }
+
+    function resetFilters() {
+      currentCategoryFilter = null;
+      currentSubcategoryFilter = null;
+      currentProductTypeFilter = null;
+      document.getElementById('stockFilterCheck').checked = false;
+      document.getElementById('minPriceInput').value = '';
+      document.getElementById('maxPriceInput').value = '';
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.brand-checkbox').forEach(cb => cb.checked = false);
+      document.querySelector('input[name="unitFilter"][value="all"]').checked = true;
+      document.getElementById('currentCategoryBreadcrumb').innerText = 'Todos los Productos (SKU)';
+      renderProducts();
+    }
+
+    // TOAST NOTIFICATION UTILITY
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
